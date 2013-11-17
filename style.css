@@ -26,3 +26,10 @@
 	clear: both;
 }
 
+.loader {
+	background-image: url("loaders/Circle Ball.gif");
+	height: 100px;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: none;
+}

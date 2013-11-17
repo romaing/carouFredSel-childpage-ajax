@@ -1,8 +1,10 @@
-
 (function($){
-	$(function(){
 
-		$("#childpage_carousel").carouFredSel({
+	$(function(){
+		var childpage = $("#childpage_carousel");
+		var list_carousel =$( ".list_carousel" )
+
+		childpage.carouFredSel({
 
 			//responsive: true,
 			//width: '100%',
@@ -50,28 +52,29 @@
 		
 		}).find("li").click(function() {
 			var deviation = 0;
-			$("#childpage_carousel").trigger("slideTo", [$(this), deviation]);
+			childpage.trigger("slideTo", [$(this), deviation]);
 			selectedpage();
 		}).css("cursor", "pointer");
+
 		$("a.aslide").click(function(event){
 			event.preventDefault();
 			//console.log($(this))
 			var deviation = 0;
-			$("#childpage_carousel").trigger("slideTo", [$(this).parent, deviation]);
+			childpage.trigger("slideTo", [$(this).parent, deviation]);
 			selectedpage();
 		}).css("cursor", "pointer");
 
 		$("#buttonnext").click(function() {
-			$("#childpage_carousel").trigger("next", 1);
+			childpage.trigger("next", 1);
 			selectedpage();
 		}).css("cursor", "pointer");
+
 		$("#buttonprev").click(function() {
-			$("#childpage_carousel").trigger("prev", 1);
+			childpage.trigger("prev", 1);
 			selectedpage();
 		}).css("cursor", "pointer");
 
-
-		$("#childpage_carousel").swipe( {
+		childpage.swipe( {
 			//Generic swipe handler for all directions
 			swipe:function(event, direction, distance, duration, fingerCount) {
 				console.log("You swiped " + direction );
@@ -81,10 +84,13 @@
 			threshold:100
 		}).css("cursor", "move");
 
+		list_carousel.after( '<div class="clearfix"></div><div class="loader"></div><div class="result"></div>' );
+
+
 
 
 		var posmax ;
-		$( "ul#childpage_carousel li" ).data('bar',function(index){
+		$( childpage.selector + " li" ).data('bar',function(index){
 			return index;
 		}).addClass(function( index ) {
 			posmax = index;
@@ -92,11 +98,12 @@
 		});	
 
 		function selectedpage(){
-				$( "#result" ).css("display", "none");
-				$( "#result" ).css("opacity", "0.1");
-				$("#childpage_carousel .selected").removeClass( "selected" );
-				var pos = $("#childpage_carousel").triggerHandler("currentPosition");
-				newItems = $("#childpage_carousel .item-"+pos).addClass( "selected" );
+				$( ".loader" ).css("display", "block");
+				$( ".result" ).css("display", "none");
+				$( ".result" ).css("opacity", "0.1");
+				$( childpage.selector + " .selected").removeClass( "selected" );
+				var pos = childpage.triggerHandler("currentPosition");
+				newItems = $( childpage.selector + " .item-"+pos).addClass( "selected" );
 				loadpage(newItems.data("id"));
 		}
 
@@ -105,52 +112,39 @@
 			$.get( "?p="+id, function( data ) {
 				var content = $( data ).find( "article" );
 				content.addClass( "souspage" );
-				$( "#result" ).empty().append( content ).css("display", "block");
-				$( "#result" ).empty().append( content ).clearQueue().animate({'display': "block", "opacity": "1"});
+				$( ".loader" ).css("display", "none");
+				$( ".result" ).empty().append( content ).css("display", "block");
+				$( ".result" ).empty().append( content ).clearQueue().animate({'display': "block", "opacity": "1"});
 				
 			});
 		}
 
 
 
-		$("#childpage_carousel .item-0").addClass( "selected" );
+		$( childpage.selector + " .item-0").addClass( "selected" );
 		selectedpage();
 
 
 
-		$("#childpage_carousel").trigger("currentVisible", function( items ) {
+		childpage.trigger("currentVisible", function( items ) {
 			items.addClass( "Visible" );
-			//$("#foo").trigger("configuration", ["items", items.length, false]);
-			//var visible = $("#childpage_carousel").triggerHandler("configuration", "items.visible");
-			//alert( "The carousel has " + visible + " items visible" );
+
 		});
 
-			/*
-			var visible = $("#childpage_carousel").triggerHandler("configuration", "items.visible");
-			insertItems =  4 - visible;
-			console.log( insertItems);
-			*/
 			insertItems =  2;
 			for (var i = 0 ; i < insertItems; i++) {
-				$("#childpage_carousel").trigger("insertItem", '<li style="visibility:hidden;"></li>');
+				childpage.trigger("insertItem", '<li style="visibility:hidden;"></li>');
 			}		
 
+		$(window).resize(function() {
+			childpage.trigger("updateSizes");
+			childpage.trigger("ajout");
+		});	
 	});
 
 
-	$(window).resize(function() {
-		$("#childpage_carousel").trigger("updateSizes");
-		$("#childpage_carousel").trigger("ajout");
-	});
 
-	$( "#childpage_carousel" ).on( "ajout", function() {
-			//ajout pour les slider de moin de 3 item
 
-	});
-	$( "#childpage_carousel" ).on( "custom", function( event, param1, param2 ) {
-		console.log( param1 + "\n" + param2 );
-	});
-	$( "#childpage_carousel").trigger( "custom", [ "Custom", "Event" ] );
 
 })(jQuery);
 
