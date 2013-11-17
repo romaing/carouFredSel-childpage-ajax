@@ -12,9 +12,7 @@ how to use
 
 1/ install "Advanced Post List" and "carouFredSel-childpage-ajax" and activate
 
-2/ Import preset Name "childpage" in "Advanced Post List"
-
-/APL.childpage.2013-11-17.json
+2/ Import preset Name "childpage" in "Advanced Post List" (file : APL.childpage.2013-11-17.json)
 
 - load the preset 
 - adjust the selector 
