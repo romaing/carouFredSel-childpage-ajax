@@ -23,9 +23,7 @@ function load_remote_scripts() {
 
 	wp_enqueue_script( 'mousewheel', $plugin_dir_url."helper-plugins/jquery.mousewheel.min.js", array("jquery") );
 	wp_enqueue_script( 'touchSwipe', $plugin_dir_url."helper-plugins/jquery.touchSwipe.min.js", array("jquery") );
-	//romain
-	// bug avec layer slider
-	//wp_enqueue_script( 'transit', $plugin_dir_url."helper-plugins/jquery.transit.min.js", array("jquery") );
+	wp_enqueue_script( 'transit', $plugin_dir_url."helper-plugins/jquery.transit.min.js", array("jquery") );
 
 	wp_enqueue_script( 'carouFredSel-param', $plugin_dir_url."carouFredSel-childpage-param.js", array("jquery") );
 }
