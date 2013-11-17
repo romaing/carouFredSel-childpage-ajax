@@ -14,7 +14,7 @@ how to use
 
 2/ Import preset Name "childpage" in "Advanced Post List"
 
-https://github.com/romaing/carouFredSel-childpage-ajax/master/APL.childpage.2013-11-17.json
+/APL.childpage.2013-11-17.json
 
 - load the preset 
 - adjust the selector 
