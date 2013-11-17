@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: carouFredSel-childpage-ajax
-Plugin URI: http://composant.gires.net
+Plugin URI: https://github.com/romaing/carouFredSel-childpage-ajax
 Description: A simplified ajax front end carouFredSel-childpage-ajax
 Version: 1.0
 Author: romain Gires
